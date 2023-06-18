@@ -1,7 +1,8 @@
 {
     "url":[
         {
-            "DateApiUrl":"http://worldtimeapi.org/api/timezone/America/Sao_Paulo"
+            "DateApiUrl":"http://worldtimeapi.org/api/timezone/America/Sao_Paulo",
+            "Bc.Watcher.Api":"MOCK-URL-FOR-NOW"
         }
     ]
 }
