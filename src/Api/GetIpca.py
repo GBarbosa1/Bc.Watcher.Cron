@@ -1,22 +1,22 @@
 import requests
 from Json.JsonHandler import json_load
 
-def monitoredPrices():
-    url = json_load("Settings\settings.json")['endpoints'][0]['Bc.Watcher.Api/PrecosMonitoradosTotal'] 
+def monitoredPrices(last):
+    url = json_load("Settings\settings.json")['endpoints'][0]['Bc.Watcher.Api/PrecosMonitoradosTotal'] + str(last)
     responseRaw = requests.request("GET", url, headers={}, data={})
     return responseRaw.json(), responseRaw.status_code
 
-def durableGoods():
-    url = json_load("Settings\settings.json")['endpoints'][0]['Bc.Watcher.Api/DurableGoods'] 
+def durableGoods(last):
+    url = json_load("Settings\settings.json")['endpoints'][0]['Bc.Watcher.Api/DurableGoods'] + str(last)
     responseRaw = requests.request("GET", url, headers={}, data={})
     return responseRaw.json(), responseRaw.status_code
 
-def nonDurableGoods():
-    url = json_load("Settings\settings.json")['endpoints'][0]['c.Watcher.Api/NonDurableGoods'] 
+def nonDurableGoods(last):
+    url = json_load("Settings\settings.json")['endpoints'][0]['c.Watcher.Api/NonDurableGoods'] + str(last)
     responseRaw = requests.request("GET", url, headers={}, data={})
     return responseRaw.json(), responseRaw.status_code
 
-def services():
-    url = json_load("Settings\settings.json")['endpoints'][0]['Bc.Watcher.Api/Services'] 
+def services(last):
+    url = json_load("Settings\settings.json")['endpoints'][0]['Bc.Watcher.Api/Services'] + str(last)
     responseRaw = requests.request("GET", url, headers={}, data={})
     return responseRaw.json(), responseRaw.status_code

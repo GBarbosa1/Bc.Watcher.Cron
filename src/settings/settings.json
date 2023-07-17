@@ -2,10 +2,18 @@
     "endpoints":[
         {
             "DateApiUrl":"http://worldtimeapi.org/api/timezone/America/Sao_Paulo",
-            "Bc.Watcher.Api/PrecosMonitoradosTotal":"http://127.0.0.1:8000/Ipca/PrecosMonitoradosTotal",
-            "Bc.Watcher.Api/DurableGoods":"http://127.0.0.1:8000/Ipca/BensDuraveis",
-            "Bc.Watcher.Api/NonDurableGoods":"http://127.0.0.1:8000/Ipca/BensNaoDuraveis",
-            "Bc.Watcher.Api/Services":"http://127.0.0.1:8000/Ipca/Servicos"
+            "Bc.Watcher.Api/PrecosMonitoradosTotal":"http://127.0.0.1:8000/Ipca/PrecosMonitoradosTotal/",
+            "Bc.Watcher.Api/DurableGoods":"http://127.0.0.1:8000/Ipca/BensDuraveis/",
+            "Bc.Watcher.Api/NonDurableGoods":"http://127.0.0.1:8000/Ipca/BensNaoDuraveis/",
+            "Bc.Watcher.Api/Services":"http://127.0.0.1:8000/Ipca/Servicos/"
         }
+    ],
+    "dataframeLocs":[
+        {
+            "monitoredTotal" : "monitored_total",
+            "value" : "value"
+        }
+    
     ]
+    
 }
