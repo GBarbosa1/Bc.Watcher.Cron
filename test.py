@@ -1,16 +1,11 @@
-import polars as pl
-import datetime
+import requests
 
-def loadExcell(filePath):
-    lastValues = pl.read_excel(filePath)
-    return lastValues
+url = "http://127.0.0.1:8000/Ipca/PrecosMonitoradosTotal/13"
 
-def readVar(dataframe,column, indicator):
-    value  = dataframe[dataframe[column]] == indicator
-    return value
+payload = {}
+headers = {}
 
-lastValues = loadExcell("last_values_copy.xlsx")
-a = lastValues['value'][0]
-a = datetime.datetime.strptime(a, '%m-%d-%y').strftime('%m/%d/%Y')
-print(a)
+response = requests.request("GET", url, headers=headers, data=payload).json()
+
+print(str(response[12]))
 

@@ -1,9 +1,5 @@
-import polars as pl
+import pandas as pd
 
 def loadExcell(filePath):
-    lastValues = pl.read_excel(filePath)
+    lastValues = pd.read_excel(filePath)
     return lastValues
-
-def readVar(dataframe,column, indicator):
-    value  = dataframe[dataframe[column]] == indicator
-    return value
