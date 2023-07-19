@@ -3,7 +3,7 @@ from Json.JsonHandler import json_load
 from datetime import datetime
 
 def GetDate():
-    url = json_load("Settings\settings.json")['url'][0]['DateApiUrl'] 
+    url = json_load("Settings\settings.json")['endpoints'][0]['DateApiUrl'] 
     responseRaw = requests.request("GET", url, headers={}, data={})
     response = responseRaw.json()['datetime']
     datetimeObject = datetime.strptime(response, "%Y-%m-%dT%H:%M:%S.%f%z")

@@ -1,8 +1,22 @@
 import requests
 from Json.JsonHandler import json_load
-from datetime import datetime
 
-def getIpca():
-    url = json_load("Settings\settings.json")['url'][0]['Bc.Watcher.Api'] 
+def monitoredPrices(last):
+    url = json_load("Settings\settings.json")['endpoints'][0]['Bc.Watcher.Api/PrecosMonitoradosTotal'] + str(last)
+    responseRaw = requests.request("GET", url, headers={}, data={})
+    return responseRaw.json(), responseRaw.status_code
+
+def durableGoods(last):
+    url = json_load("Settings\settings.json")['endpoints'][0]['Bc.Watcher.Api/DurableGoods'] + str(last)
+    responseRaw = requests.request("GET", url, headers={}, data={})
+    return responseRaw.json(), responseRaw.status_code
+
+def nonDurableGoods(last):
+    url = json_load("Settings\settings.json")['endpoints'][0]['c.Watcher.Api/NonDurableGoods'] + str(last)
+    responseRaw = requests.request("GET", url, headers={}, data={})
+    return responseRaw.json(), responseRaw.status_code
+
+def services(last):
+    url = json_load("Settings\settings.json")['endpoints'][0]['Bc.Watcher.Api/Services'] + str(last)
     responseRaw = requests.request("GET", url, headers={}, data={})
     return responseRaw.json(), responseRaw.status_code
