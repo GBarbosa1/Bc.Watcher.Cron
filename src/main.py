@@ -74,7 +74,16 @@ while True:
         except Exception as error:
             print("Sorry we couldn't get the monitored non durable goods IPCA, we meet the following problems: " + str(error) + "API status code were: "+ str(statusCode))
         
-        # try:
-        #     servicesResponse, servicesStatusCode = services()
-        # except Exception as error:
-        #     print("Sorry we couldn't get the monitored durable service IPCA, we meet the following problems: " + str(error) + "API status code were: "+ str(statusCode))
+        try:
+            responseServices, servicesStatusCode = services(1)
+            responseServices = responseServices[0]
+            if(responseServices == lastValues.iloc[3,1]) == False:
+                sendMessage("Olá parece que identificamos uma novo valor de: IPCA de serviços")
+                responseServices, servicesStatusCode = durableGoods(13)
+                sendMessage(str(responseServices[12]))
+                lastValues.iloc[3,1] = todayDateObject
+                lastValues.to_excel("last_values.xlsx", index=False)
+                
+                
+        except Exception as error:
+            print("Sorry we couldn't get the monitored durable service IPCA, we meet the following problems: " + str(error) + "API status code were: "+ str(statusCode))
