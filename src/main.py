@@ -24,6 +24,7 @@ while True:
     todayDateObject, todayDateString, status  = GetDate()
     isCopomDate = check_string_in_list(todayDateString,dateList)
     isIpcaDate = check_string_in_list(todayDateString,ipcaDates)
+    print("Control")
     time.sleep(3)
 
     if isIpcaDate == True:
@@ -64,9 +65,9 @@ while True:
         try:
             responseNonDurableGoods, NonDurableGoodsStatusCode = nonDurableGoods(1)
             responseNonDurableGoods = responseNonDurableGoods[0]
-            if(responseNonDurableGoods == lastValues.iloc[2,1]) == False:
-                sendMessage("Olá parece que identificamos uma novo valor de: IPCA para bens duárveis")
-                responseNonDurableGoods, NonDurableGoodsStatusCode = durableGoods(13)
+            if(todayDateObject == lastValues.iloc[2,1]) == False:
+                sendMessage("Olá parece que identificamos uma novo valor de: IPCA para bens não duárveis")
+                responseNonDurableGoods, NonDurableGoodsStatusCode = nonDurableGoods(13)
                 sendMessage(str(responseNonDurableGoods[12]))
                 lastValues.iloc[2,1] = todayDateObject
                 lastValues.to_excel("last_values.xlsx", index=False)
@@ -77,7 +78,7 @@ while True:
         try:
             responseServices, servicesStatusCode = services(1)
             responseServices = responseServices[0]
-            if(responseServices == lastValues.iloc[3,1]) == False:
+            if(todayDateObject == lastValues.iloc[3,1]) == False:
                 sendMessage("Olá parece que identificamos uma novo valor de: IPCA de serviços")
                 responseServices, servicesStatusCode = durableGoods(13)
                 sendMessage(str(responseServices[12]))

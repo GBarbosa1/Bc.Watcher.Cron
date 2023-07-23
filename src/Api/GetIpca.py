@@ -12,7 +12,7 @@ def durableGoods(last):
     return responseRaw.json(), responseRaw.status_code
 
 def nonDurableGoods(last):
-    url = json_load("Settings\settings.json")['endpoints'][0]['c.Watcher.Api/NonDurableGoods'] + str(last)
+    url = json_load("Settings\settings.json")['endpoints'][0]['Bc.Watcher.Api/NonDurableGoods'] + str(last)
     responseRaw = requests.request("GET", url, headers={}, data={})
     return responseRaw.json(), responseRaw.status_code
 
