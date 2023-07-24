@@ -1,6 +1,6 @@
 from Api.CheckDateGet import GetDate
 from Api.sendMessage import sendMessage, messageBuilder
-from Api.GetIpca import monitoredPrices#, durableGoods, nonDurableGoods, services
+from Api.GetIpca import monitoredPrices, durableGoods #, nonDurableGoods, services
 from Json.JsonHandler import json_load
 from Helpers.dataframeHelper import loadExcell
 from Helpers.StringHelper import check_string_in_list
@@ -54,18 +54,20 @@ while True:
             print("Sorry we couldn't get the monitored IPCA Prices, we meet the following problems: " + str(error))
         
         
-        # try:
-        #     responseDurableGoods, durableGoodsResponseStatusCode = durableGoods(1)
-        #     responseDurableGoods = responseDurableGoods[0]
-        #     if(todayDateObject == lastValues.iloc[1,1]) == False:
-        #         sendMessage("Olá parece que identificamos uma novo valor de: IPCA para bens duárveis")
-        #         responseDurableGoods, durableGoodsStatusCode = durableGoods(13)
-        #         sendMessage(str(responseDurableGoods[12]))
-        #         lastValues.iloc[1,1] = todayDateObject
-        #         lastValues.to_excel("last_values.xlsx", index=False)
+        try:
+            responseDurableGoods = durableGoods(1)
+            responseDurableGoods = responseDurableGoods[0]['data']
+            responseDurableGoodsDate = datetime.strptime(responseDurableGoods, '%d/%m/%Y')
             
-        # except Exception as error:
-        #     print("Sorry we couldn't get the monitored durable goods IPCA, we meet the following problems: " + str(error) + "API status code were: "+ str(statusCode))
+            if(responseDurableGoodsDate == lastValues.iloc[1,1]) == False:
+                sendMessage("Olá parece que identificamos uma novo valor de: IPCA para bens duárveis")
+                responseDurableGoods = durableGoods(13)
+                messageString = messageBuilder(responseDurableGoods)
+                lastValues.iloc[1,1] = todayDateObject
+                lastValues.to_excel("last_values.xlsx", index=False)
+            
+        except Exception as error:
+            print("Sorry we couldn't get the monitored durable goods IPCA, we meet the following problems: " + str(error) + "API status code were: "+ str(statusCode))
         
         # try:
         #     responseNonDurableGoods, NonDurableGoodsStatusCode = nonDurableGoods(1)
