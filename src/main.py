@@ -39,7 +39,8 @@ while True:
                 try:
                     sendMessage("Olá parece que identificamos uma novo valor de: IPCA monitorados")
                     responseMonitoredPrices = monitoredPrices(13)
-                    sendMessage(str(responseMonitoredPrices[12]))
+                    messageString = messageBuilder(responseMonitoredPrices)
+                    sendMessage(messageString)
                     lastValues.iloc[0,1] = responseMonitoredPricesDate
                     lastValues.to_excel("last_values.xlsx", index=False)
                     
