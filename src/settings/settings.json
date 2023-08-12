@@ -6,7 +6,9 @@
             "Bc.Watcher.Api/DurableGoods":"http://127.0.0.1:8000/Ipca/BensDuraveis/",
             "Bc.Watcher.Api/NonDurableGoods":"http://127.0.0.1:8000/Ipca/BensNaoDuraveis/",
             "Bc.Watcher.Api/Services":"http://127.0.0.1:8000/Ipca/Servicos/",
-            "Bc.Watcher.Api/sendmessage":"http://127.0.0.1:8000/sendmessage"
+            "Bc.Watcher.Api/sendmessage":"http://127.0.0.1:8000/sendmessage",
+            "Bc.Watcher.Api/record": "http://127.0.0.1:8000/ata",
+            "Bc.Watcher.Api/recordLink": "http://127.0.0.1:8000/recorddownloadlink"
         }
     ],
     "dataframeLocs":[
