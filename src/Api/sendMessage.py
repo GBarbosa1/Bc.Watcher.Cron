@@ -16,10 +16,10 @@ def messageBuilder(jsonLoad):
   valueList = np.array([])
   for itens in jsonLoad:
       valueList = np.append(valueList,itens['valor'])
-  pastMean = np.mean(valueList[:12].astype(float))
-  actualMean = np.mean(valueList[1:13].astype(float))
-  pastValue = valueList[11].astype(float)
-  actualValue = valueList[12].astype(float)
+  pastMean = round(np.mean(valueList[:12].astype(float)),3)
+  actualMean = round(np.mean(valueList[1:13].astype(float)),3)
+  pastValue = round(valueList[11].astype(float),3)
+  actualValue = round(valueList[12].astype(float),3)
   messageString = f"""
   O valor átual é {actualValue}, o valor passado foi de {pastValue}.
   A média de 12 meses passados é de {pastMean} contra a atual de {actualMean}

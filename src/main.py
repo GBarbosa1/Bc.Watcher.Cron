@@ -5,7 +5,6 @@ from Api.getRecord import getRecordDate, getRecordLink
 from Json.JsonHandler import json_load
 from Helpers.dataframeHelper import loadExcell
 from Helpers.StringHelper import check_string_in_list
-from Helpers.dateHelper import dateConverter
 import time
 import pandas as pd
 from datetime import datetime
@@ -27,11 +26,25 @@ while True:
     todayDateObject, todayDateString, status  = GetDate()
     isCopomDate = check_string_in_list(todayDateString,dateList)
     isIpcaDate = check_string_in_list(todayDateString,ipcaDates)
-    time.sleep(3)
-    print("Control")
+    
+    if isCopomDate == True:
+        print(isCopomDate)
+        try:
+            recordDate = getRecordDate()
+            recordDate = datetime.strptime(recordDate, '%d/%m/%Y')
+            if(recordDate == lastValues.iloc[4,1].to_pydatetime()) == False:
+                sendMessage("Olá parece que identificamos uma nova ata do Copom, segue o link para download")
+                recordLink = getRecordLink()
+                sendMessage(recordLink)
+                lastValues.iloc[4,1] = recordDate
+                lastValues.to_excel("last_values.xlsx", index=False)
+                    
+        except Exception as error:
+            print("Sorry we couldn't get the record on the COPOM meeting, we meet the following problems: " + str(error))
 
     if isIpcaDate == True:
         try:
+            print(isIpcaDate)
             responseMonitoredPrices= monitoredPrices(1)
             responseMonitoredPrices = responseMonitoredPrices[0]['data']
             responseMonitoredPricesDate = datetime.strptime(responseMonitoredPrices, '%d/%m/%Y')
@@ -103,19 +116,9 @@ while True:
         except Exception as error:
             print("Sorry we couldn't get the monitored durable service IPCA, we meet the following problems: " + str(error))
             
-    if isCopomDate == True:
-        print(isCopomDate)
-        try:
-            recordDate = getRecordDate()
-            recordDate = datetime.strptime(recordDate, '%d/%m/%Y')
-            if(recordDate == lastValues.iloc[4,1].to_pydatetime()) == False:
-                sendMessage("Olá parece que identificamos uma nova ata do Copom")
-                recordLink = getRecordLink()
-                sendMessage(recordLink)
-                lastValues.iloc[4,1] = recordDate
-                lastValues.to_excel("last_values.xlsx", index=False)
-                    
-        except Exception as error:
-            print("Sorry we couldn't get the record on the COPOM meeting, we meet the following problems: " + str(error))
+    
+    print("Control")
+    time.sleep(30)
+    
             
             
